@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\actions.json",
+    "\\app\\api",
+    "\\app\\api\\actions",
+    "\\app\\api\\actions\\create"
+  ],
+  "SelectedNode": "\\app\\api\\actions\\create\\route.ts",
+  "PreviewInSolutionExplorer": false
+}
