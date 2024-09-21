@@ -19,7 +19,7 @@ const Home = () => {
           <button
             className="bg-zinc-400 text-white px-4 py-2 rounded hover:bg-slate-600"
           >
-            <a href="">Create Secret Blink</a>
+            <a href="https://dial.to/devnet?action=solana-action:https://seclink.vercel.app/api/actions/create">Create Secret Blink</a>
           </button>
         </div>
       </main>
