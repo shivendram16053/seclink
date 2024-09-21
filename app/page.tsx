@@ -3,10 +3,6 @@
 import '@dialectlabs/blinks/index.css';
 
 const Home = () => {
-  const handleCreate = () => {
-    // Define what happens when the button is clicked
-    console.log("Create action triggered!");
-  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen relative p-4">

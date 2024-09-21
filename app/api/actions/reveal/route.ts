@@ -1,13 +1,12 @@
 import { connectToDatabase } from "@/app/(mongo)/db";
 import userData from "@/app/(mongo)/userData";
 import {
-  createActionHeaders,
   NextActionPostRequest,
   ActionError,
   CompletedAction,
   ACTIONS_CORS_HEADERS,
 } from "@solana/actions";
-import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
+import { clusterApiUrl, Connection } from "@solana/web3.js";
 const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
 export const GET = async () => {
@@ -34,11 +33,11 @@ export const POST = async (req: Request) => {
       signature = body.signature;
       if (!signature) throw "Invalid signature";
     } catch (err) {
-      throw 'Invalid "signature" provided';
+      throw (err);
     }
 
     try {
-      let status = await connection.getSignatureStatus(signature);
+      const status = await connection.getSignatureStatus(signature);
 
       if (!status) throw "Unknown signature status";
 
@@ -47,7 +46,7 @@ export const POST = async (req: Request) => {
           status.value.confirmationStatus != "confirmed" &&
           status.value.confirmationStatus != "finalized"
         ) {
-          let actionError: ActionError = {
+          const actionError: ActionError = {
             message: "Signature not confirmed or finalized",
           };
           return new Response(JSON.stringify(actionError), {
@@ -56,11 +55,6 @@ export const POST = async (req: Request) => {
           });
         }
       }
-
-      const transaction = await connection.getParsedTransaction(
-        signature,
-        "confirmed"
-      );
 
       const payload: CompletedAction = {
         type: "completed",
@@ -80,7 +74,7 @@ export const POST = async (req: Request) => {
     }
   } catch (err) {
     console.error("General error:", err);
-    let actionError: ActionError = { message: "An unknown error occurred" };
+    const actionError: ActionError = { message: "An unknown error occurred" };
     if (typeof err == "string") actionError.message = err;
     return new Response(JSON.stringify(actionError), {
       status: 400,

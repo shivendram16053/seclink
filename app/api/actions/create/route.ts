@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import {
   Transaction,
   PublicKey,
@@ -17,7 +17,7 @@ const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 const MY_PUB_KEY = `${process.env.PUBLIC_KEY}`;
 
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
   const payload : ActionGetResponse ={
     icon: `${process.env.BASE_URL}/logo.png`,
     title: "Create your blink secret",

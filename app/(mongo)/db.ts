@@ -9,9 +9,9 @@ if (!MONGO_URL) {
 export const connectToDatabase = async () => {
     try {
         if (mongoose.connection.readyState === 0) {
-            await mongoose.connect(MONGO_URL),{
-                dbName:'userdb'
-            };
+            await mongoose.connect(MONGO_URL, {
+                dbName: 'userdb'
+            });
             console.log('Connected to MongoDB');
         }
     } catch (error) {

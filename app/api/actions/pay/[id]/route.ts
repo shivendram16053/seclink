@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import {
     Transaction,
     PublicKey,
-    SystemProgram,
+    
     Connection,
     clusterApiUrl,
-    LAMPORTS_PER_SOL,
+    
 } from "@solana/web3.js";
 import {
     ACTIONS_CORS_HEADERS,
@@ -80,7 +80,6 @@ export const POST = async (req: NextRequest) => {
             return new Response("Organization not found", { status: 404 });
         }
 
-        let transaction;
         const tokenMintAddress = new PublicKey(
             "SENDdRQtYMWaQrBroBrJ2Q53fgVuq95CV9UPGEvpCxa"
           );
@@ -106,7 +105,7 @@ export const POST = async (req: NextRequest) => {
           }
     
           if (!userTokenAccount) {
-            let actionError: ActionError = { message: "You don't have a token account for SEND" };
+            const actionError: ActionError = { message: "You don't have a token account for SEND" };
             return new Response(JSON.stringify(actionError), {
               status: 400,
               headers: ACTIONS_CORS_HEADERS,
@@ -115,7 +114,7 @@ export const POST = async (req: NextRequest) => {
     
           // Check if the user has enough balance
           if (userBalance < parseFloat(userDetails.price)) {
-            let actionError: ActionError = { message: "You don't have enough SEND for fees" };
+            const actionError: ActionError = { message: "You don't have enough SEND for fees" };
             return new Response(JSON.stringify(actionError), {
               status: 400,
               headers: ACTIONS_CORS_HEADERS,
@@ -142,7 +141,7 @@ export const POST = async (req: NextRequest) => {
           }
     
           if (!organizerTokenAccount) {
-            let actionError: ActionError = { message: "Organizer does not have a token account for SEND" };
+            const actionError: ActionError = { message: "Organizer does not have a token account for SEND" };
             return new Response(JSON.stringify(actionError), {
               status: 400,
               headers: ACTIONS_CORS_HEADERS,
@@ -150,7 +149,7 @@ export const POST = async (req: NextRequest) => {
           }
     
           // Create the transaction for SEND
-          transaction = new Transaction().add(
+          const transaction = new Transaction().add(
             createTransferInstruction(
               userTokenAccount, // Source account (user's token account)
               organizerTokenAccount, // Destination account (organizer's token account)

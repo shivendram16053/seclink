@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IUserBlink extends Document {
     userId: string;
@@ -6,7 +6,7 @@ export interface IUserBlink extends Document {
     price:number;
     image:string;
     userPubKey:string;
-    createdAt:String;
+    createdAt:Date;
 }
 
 const UserBlinkSchema: Schema<IUserBlink> = new Schema({

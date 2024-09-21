@@ -1,13 +1,12 @@
 import { connectToDatabase } from "@/app/(mongo)/db";
 import userData from "@/app/(mongo)/userData";
 import {
-  createActionHeaders,
   NextActionPostRequest,
   ActionError,
   CompletedAction,
   ACTIONS_CORS_HEADERS,
 } from "@solana/actions";
-import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
+import { clusterApiUrl, Connection } from "@solana/web3.js";
 import { customAlphabet } from "nanoid";
 const generateRandomId = customAlphabet(`${process.env.SECRET_KEY}`, 15);
 const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
@@ -38,11 +37,11 @@ export const POST = async (req: Request) => {
       signature = body.signature;
       if (!signature) throw "Invalid signature";
     } catch (err) {
-      throw 'Invalid "signature" provided';
+      throw (err);
     }
 
     try {
-      let status = await connection.getSignatureStatus(signature);
+      const status = await connection.getSignatureStatus(signature);
 
       if (!status) throw "Unknown signature status";
 
@@ -51,7 +50,7 @@ export const POST = async (req: Request) => {
           status.value.confirmationStatus != "confirmed" &&
           status.value.confirmationStatus != "finalized"
         ) {
-          let actionError: ActionError = {
+          const actionError: ActionError = {
             message: "Signature not confirmed or finalized",
           };
           return new Response(JSON.stringify(actionError), {
@@ -72,11 +71,6 @@ export const POST = async (req: Request) => {
       });
 
       await newUserData.save();
-
-      const transaction = await connection.getParsedTransaction(
-        signature,
-        "confirmed"
-      );
 
       const blinkUrl = `${process.env.BASE_URL}/pay/${userId}`;
       const twitterShareUrl = `https://twitter.com/intent/tweet?text=Check%20out%20my%20secret:%20${encodeURIComponent(
@@ -108,7 +102,7 @@ export const POST = async (req: Request) => {
     }
   } catch (err) {
     console.error("General error:", err);
-    let actionError: ActionError = { message: "An unknown error occurred" };
+    const actionError: ActionError = { message: "An unknown error occurred" };
     if (typeof err == "string") actionError.message = err;
     return new Response(JSON.stringify(actionError), {
       status: 400,
