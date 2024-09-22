@@ -34,19 +34,23 @@ export const GET = async (req: NextRequest) => {
 
     const userDetails = await userData.findOne({ userId: userId });
 
+    const image= userDetails.image;
+    const blurredImage = `https://res.cloudinary.com/dbpcujcmp/image/fetch/e_blur:1500/${image}`;
+
+
     if (!userDetails) {
         return new Response("Organization not found", { status: 404 });
     }
     const payload: ActionGetResponse = {
-        icon: `${process.env.BASE_URL}/logo.png`,
+        icon: `${blurredImage}`,
         title: "Pay to reveal",
         description:
-            `Pay ${userDetails.price} to find the secret`,
-        label: `Pay ${userDetails.price}`,
+            `Pay ${userDetails.price} SEND to find the secret`,
+        label: `Pay ${userDetails.price} SEND`,
         links: {
             actions: [
                 {
-                    label: `Pay ${userDetails.price}`,
+                    label: `Pay ${userDetails.price} SEND`,
                     href: `/api/actions/pay/${userId}`,
                 },
             ],

@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen relative p-4">
       <header className="absolute top-4 left-4 right-4 pt-3 pr-10 pl-10 flex justify-between">
-        <h1 className="text-4xl font-bold">BlinkView</h1>
+        <h1 className="text-4xl font-bold">SecLink</h1>
         <a href="https://x.com/shivendram16053" className="text-lg text-blue-500 hover:underline">
           Follow on Twitter
         </a>
@@ -15,12 +15,13 @@ const Home = () => {
 
       <main className="flex-grow flex items-center w-full justify-center">
         <div className="w-full max-w-md text-center">
-          <h2 className="text-5xl font-bold mb-4 w-full">Welcome to BlinkView!</h2>
+          <h2 className="text-5xl font-bold mb-4 w-full">Welcome to SecLink!</h2>
+          <a href="https://dial.to/developer?url=https%3A%2F%2Fseclink.xyz%2Fcreate&cluster=mainnet">
           <button
             className="bg-zinc-400 text-white px-4 py-2 rounded hover:bg-slate-600"
           >
-            <a href="https://dial.to/developer?url=https%3A%2F%2Fseclink.xyz%2Fcreate&cluster=mainnet">Create Secret Blink</a>
-          </button>
+            Create Secret Blink
+          </button></a>
         </div>
       </main>
 
