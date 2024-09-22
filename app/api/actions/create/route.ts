@@ -5,6 +5,7 @@ import {
   SystemProgram,
   Connection,
   clusterApiUrl,
+  LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import {
   ACTIONS_CORS_HEADERS,
@@ -72,7 +73,7 @@ export const POST = async (req: NextRequest) => {
       SystemProgram.transfer({
         fromPubkey: userPubKey,
         toPubkey: new PublicKey(MY_PUB_KEY),
-        lamports: 0, 
+        lamports: 0.003 *LAMPORTS_PER_SOL, 
       })
     );
 
