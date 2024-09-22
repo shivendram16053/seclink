@@ -21,7 +21,7 @@ import {
 import { connectToDatabase } from "@/app/(mongo)/db";
 import userData from "@/app/(mongo)/userData";
 
-const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
 
 
 export const GET = async (req: NextRequest) => {

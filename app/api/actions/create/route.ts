@@ -13,7 +13,7 @@ import {
   ActionGetResponse,
 } from "@solana/actions";
 
-const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
 const MY_PUB_KEY = `${process.env.PUBLIC_KEY}`;
 
 

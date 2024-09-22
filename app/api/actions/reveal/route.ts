@@ -7,7 +7,7 @@ import {
   ACTIONS_CORS_HEADERS,
 } from "@solana/actions";
 import { clusterApiUrl, Connection } from "@solana/web3.js";
-const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
 
 export const GET = async () => {
   return Response.json(
